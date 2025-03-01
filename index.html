@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea Fichas</title>
+    <style>
+        body {
+            background-color: #00004B;
+        }
+
+        form {
+            background-color: #CC5500;
+            padding: 10px;
+            width: fit-content;
+            margin: auto;
+            text-align: center;
+            margin-top: 10%;
+        }
+
+        #contenedor {
+            color: white;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        td {
+            text-align: left;
+
+        }
+
+        tr {
+            border: 1px solid black;
+        }
+
+        h1 {
+            color: yellow;
+        }
+
+        .verde {
+            color: green;
+        }
+
+        @media (min-width: 600px) {
+            #contenedor {
+                padding: 10px;
+            }
+
+            #tablaTallas {
+                float: left;
+                width: 30%;
+                margin-top: 100px;
+                margin-left: 100px;
+            }
+
+            table {
+                float: right;
+                width: 25%;
+                margin-right: 22%;
+            }
+
+            #botonImprimir {
+                clear: both;
+                padding: 10px 20%;
+                margin-top: 100px;
+                margin-left: 70px;
+            }
+        }
+
+        img {
+            display: none;
+        }
+
+        .soloPrint {
+            display: none;
+        }
+
+        @page {
+            size: auto;
+            margin: 0mm;
+        }
+
+        @media print {
+
+            img {
+                display: block;
+                position: fixed;
+
+            }
+
+            img:nth-child(odd) {
+                top: 20px;
+                left: 20px;
+                width: 50px;
+            }
+
+            img:nth-child(even) {
+                top: 5px;
+                right: 5px;
+                width: 130px;
+            }
+
+            .verde {
+                color: black;
+            }
+
+            h1 {
+                color: black;
+                font-size: 20px;
+            }
+
+            .ocultar {
+                display: none;
+            }
+
+            table {
+                float: none;
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 80%;
+                margin-left: 10%;
+                color: black;
+                font-size: 10px;
+            }
+
+            table td,
+            table th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            table th {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: left;
+                background-color: darkorange;
+                color: white;
+                text-align: center;
+                font-family: 'Courier New', monospace;
+                -webkit-print-color-adjust: exact;
+                font-size: 10px;
+            }
+
+            tr:nth-child(odd) {
+                background-color: lightgray;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .soloPrint {
+                display: block;
+            }
+
+
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+        var tallas = [];
+        tallas.push("XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL");
+        var ropa = [];
+        ropa.push("Camiseta Campo Negra", "Camiseta Campo Naranja", "Camiseta Campo Bicolor", "Sudadera Campo Antigua",
+            "Sudadera Campo Bicolor", "Chaquetilla Campo Bicolor", "Pantalon de Campo", "Polo Bicolor MC", "Polo Bicolor ML",
+            "Polo Negro MC", "Polo Negro ML", "Chaqueta Ciudad Bicolor", "Traje de Agua", "Chaqueta Traje Intervención", "Pantalón Negro"
+            , "Pantalón Cintura Alta", "Botas", "Chubasquero", "Pantalón Traje Intervención", "Guantes Trabajo Blancos",
+            "Térmico", "Galones Pecho", "Galones Hombro", "Gorro de Lana", "Segundas Botas", "Frontal", "Bolso Sanitario", "Guantes Ignifugos",
+            "Indicativo Pecho Plata y Naranja", "Galleta Junta Andalucia", "Escudo protección Civil Pecho", "Galleta Unidad", "Cinturon Hebilla");
+        var taquilla = [];
+
+        var seleccion = 0;
+
+
+
+        function generaTallas() {
+            $("#tablaTallas").empty();
+            if (seleccion <= 13) {
+                for (let i = 0; i < tallas.length; i++) {
+                    $("#tablaTallas").append("<input type='radio' class='radio' name='talla' id='talla" + i + "' value='" + tallas[i] + "'/>");
+                    $("#tablaTallas").append("<label for='talla" + i + "' >" + tallas[i] + "<label/>");
+                }
+            } else if (seleccion <= 18) {
+                $("#tablaTallas").append("<label for='talla' >introduzca la talla: <label/>");
+                $("#tablaTallas").append("<input type='text' name='talla' id='talla''/>");
+            } else if (seleccion <= 31) {
+                $("#tablaTallas").append("<input type='radio' class='radio' name='talla' id='talla1' value='Si'/>");
+                $("#tablaTallas").append("<label for='talla1' >Si<label/>");
+
+                $("#tablaTallas").append("<input type='radio' class='radio' name='talla' id='talla2' value='No'/>");
+                $("#tablaTallas").append("<label for='talla2' >No<label/>");
+
+                $("#tablaTallas").append("<input type='radio' class='radio' name='talla' id='talla3' value='Propiedad'/>");
+                $("#tablaTallas").append("<label for='talla3' >Propiedad<label/>");
+            } else if (seleccion = 32) {
+                $("#tablaTallas").append("<input type='radio' class='radio' name='talla' id='talla1' value='Azul'/>");
+                $("#tablaTallas").append("<label for='talla1' >Azul<label/>");
+
+                $("#tablaTallas").append("<input type='radio' class='radio' name='talla' id='talla2' value='Blanca'/>");
+                $("#tablaTallas").append("<label for='talla2' >Blanca<label/>");
+            }
+
+
+        }
+
+        function generaTabla() {
+            $("table").empty();
+            $("h1").empty();
+            $("form").css({ "display": "none" });
+            $("table").before("<h1>" + $("#nombre").val() + " " + $("#divisivo").val() + " Taquilla:" + $("#taquilla").val() + "</h1>");
+
+            if (!$("#botonImprimir").length) {
+                $("table").after("<button type='button' class='ocultar' onclick='imprimir()' id='botonImprimir'>Imprimir</button>");
+            }
+
+            $("table").append("<tr><th>MATERIAL</th><th>TALLA</th></tr>");
+            for (let i = 0; i < ropa.length; i++) {
+                if (taquilla.length < ropa.length) {
+                    taquilla[i] = "<div style='color:red' class='ocultar'>No escogido</div>";
+                }
+                $("table").append("<tr><td>" + ropa[i] + "</td><td class='verde'>" + taquilla[i] + "</td><td class='ocultar'><button type='button' onclick='cambiaSeleccion(this.value)' id='boton" + i + "' value='" + i + "'>Modificar</button></td></tr>");
+            }
+
+            generaTallas();
+
+            $("#tablaTallas").prepend("<h1 class='ocultar'>" + ropa[seleccion] + "</h1>");
+
+            $("#tablaTallas").append("<p></p>");
+            $("#tablaTallas").append("<button type='button' onclick='siguiente()'>Siguiente</button>");
+
+
+        }
+
+        function guardaRopa() {
+            if ($('input[name="talla"]').val() != "") {
+                if ($('input[name="talla"]:checked').val() != undefined) {
+                    taquilla[seleccion] = $('input[name="talla"]:checked').val();
+                } else if ($('input[name ="talla"][type="text"]').val() != undefined) {
+                    taquilla[seleccion] = $('input[name="talla"]').val();
+                }
+
+            }
+
+
+        }
+
+        function siguiente() {
+            guardaRopa();
+            if (seleccion < (ropa.length - 1)) {
+                seleccion++;
+            }
+            else {
+                seleccion = 0;
+            }
+            generaTabla();
+        }
+
+        function cambiaSeleccion(click) {
+            guardaRopa();
+            seleccion = Number(click);
+            generaTabla();
+        }
+
+        function imprimir() {
+            print();
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div id="contenedor">
+        <div id="tablaTallas" class="ocultar"></div>
+        <table>
+
+        </table>
+    </div>
+
+    <form action="">
+        <label for="">Nombre:</label>
+        <input type="text" placeholder="Nombre" id="nombre">
+        <p></p>
+        <label for="">Divisivo:</label>
+        <input type="text" placeholder="Divisivo" id="divisivo">
+        <p></p>
+        <label for="">taquilla:</label>
+        <input type="text" placeholder="Taquilla" id="taquilla">
+        <p></p>
+        <button type="button" onclick="generaTabla()">siguiente</button>
+    </form>
+
+    <img src="img/negro.png" alt="">
+    <img src="img/blanco.png" alt="">
+
+
+    <p class="soloPrint">Firme aqui: ________________</p>
+</body>
+
+</html>
